@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+* {
+  font-family: "Montserrat", sans-serif;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0.6em;
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(54.6% 0.245 262.881);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(70.7% 0.165 254.624);
+}
+
+::-webkit-scrollbar-track {
+  opacity: 0;
+}
+
