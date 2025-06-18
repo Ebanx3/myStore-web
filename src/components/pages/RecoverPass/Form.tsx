@@ -1,45 +1,31 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ErrorMessage from "../../ErrorMessage";
-import { login } from "../../../api/auth";
-import { Link, useNavigate } from "react-router-dom";
-import { useUserContext } from "../../../hooks/useUserContext";
+import { recoverPass } from "../../../api/auth";
+import { Link } from "react-router-dom";
 
 export const Form = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [errorAlert, setErrorAlert] = useState("");
-
-  const nav = useNavigate();
-  const { user, setUser} = useUserContext();
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (success) return;
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setErrorAlert("Email no válido");
       return;
     }
 
-    if (password.length < 8 || password.length > 50) {
-      setErrorAlert("El password debe contener entre 8 y 50 caracteres ");
-      return;
-    }
-
-    const res = await login({ email, password });
+    const res = await recoverPass(email);
     if (!res.success) {
       setErrorAlert(res.message);
       return;
     }
 
-    setUser(res.data ?? null);
-    nav("/");
+    setSuccess(true);
   };
-
-  useEffect(()=> {
-    if(user !== null){
-        nav('/');
-    }
-  });
 
   return (
     <>
@@ -49,29 +35,29 @@ export const Form = () => {
       >
         <label htmlFor="email"> Email:</label>
         <input
-          type="text"
+          type="email"
           id="email"
           placeholder="email@email.com"
           className="border p-2 border-stone-400 focus:outline-none"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <label htmlFor="password"> Contraseña:</label>
-        <input
-          type="password"
-          id="password"
-          placeholder="********"
-          className="border p-2 border-stone-400 focus:outline-none"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
         <input
           type="submit"
-          value="Ingresar"
+          value="Recuperar contraseña"
           className="bg-sky-700 text-white font-medium py-2 cursor-pointer hover:bg-sky-500"
         />
-        <Link to={'/recuperar_contraseña'} className="text-sm font-medium text-center text-blue-600 hover:text-blue-400">Olvide mi Contraseña</Link>
       </form>
+      {success && (
+        <div className="absolute bg-white border p-6 rounded-md flex flex-col gap-6">
+          <span >
+          Se te ha enviado un email a la dirección proporcionada.
+          <br />
+          Revisa tu email para cambiar la contraseña.
+        </span>
+          <Link to={'/'} className="bg-sky-700 hover:bg-sky-500 m-auto py-2 px-4 text-white font-medium">Volver</Link>
+        </div>
+      )}
       {errorAlert !== "" && (
         <ErrorMessage message={errorAlert} setMessage={setErrorAlert} />
       )}

@@ -11,5 +11,5 @@ export default function ErrorMessage({ message, setMessage }: Props) {
       setMessage("");
     }, 3000);
   });
-  return <span className="absolute bg-red-600 p-2 text-white text-sm font-medium">{message}</span>;
+  return <span className="absolute bg-red-700 p-2 text-white text-sm font-medium">{message}</span>;
 }

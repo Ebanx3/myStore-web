@@ -7,6 +7,6 @@ export const Header  = () => {
       <h1 className="text-3xl font-medium text-right">Crea tu tienda online en minutos,<br/> sin complicaciones.</h1>
       <Button label="Empezar" onClickMethod={()=>{}}/>
     </div>
-    <img src={HeaderImg} alt="Hero imagen" className="h-[70vh] flex-1 object-cover rounded-lg"/>
+    <img src={HeaderImg} alt="Hero imagen" className="h-[70vh] flex-1 object-cover rounded-lg m-2"/>
   </header>);
 };

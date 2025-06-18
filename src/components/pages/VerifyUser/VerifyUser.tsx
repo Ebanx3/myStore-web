@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { verifyEmail } from "../../../api/verifyUserEmail";
+import { verifyEmail } from "../../../api/auth";
 import { useState } from "react";
 import { LoaderSVG } from "../../../assets/LoaderSVG";
 
