@@ -5,11 +5,11 @@ interface Props {
   setMessage: (s: string) => void;
 }
 
-export default function ErrorMessage({ message, setMessage }: Props) {
+export const ErrorMessage = ({ message, setMessage }: Props) => {
   useEffect(() => {
     setTimeout(() => {
       setMessage("");
     }, 3000);
   });
-  return <span className="absolute bg-red-700 p-2 text-white text-sm font-medium">{message}</span>;
+  return <span className="absolute bg-red-700 p-6 text-white text-sm font-medium whitespace-pre-line">{message}</span>;
 }

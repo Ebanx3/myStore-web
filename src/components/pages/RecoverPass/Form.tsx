@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ErrorMessage from "../../ErrorMessage";
+import { ErrorMessage } from "../../ErrorMessage";
 import { recoverPass } from "../../../api/auth";
 import { Link } from "react-router-dom";
 
@@ -50,12 +50,17 @@ export const Form = () => {
       </form>
       {success && (
         <div className="absolute bg-white border p-6 rounded-md flex flex-col gap-6">
-          <span >
-          Se te ha enviado un email a la dirección proporcionada.
-          <br />
-          Revisa tu email para cambiar la contraseña.
-        </span>
-          <Link to={'/'} className="bg-sky-700 hover:bg-sky-500 m-auto py-2 px-4 text-white font-medium">Volver</Link>
+          <span>
+            Se te ha enviado un email a la dirección proporcionada.
+            <br />
+            Revisa tu email para cambiar la contraseña.
+          </span>
+          <Link
+            to={"/"}
+            className="bg-sky-700 hover:bg-sky-500 m-auto py-2 px-4 text-white font-medium"
+          >
+            Volver
+          </Link>
         </div>
       )}
       {errorAlert !== "" && (

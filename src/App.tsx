@@ -6,6 +6,7 @@ import { UserContextProvider } from "./contexts/UserContextProvider";
 import { RecoverPass } from "./components/pages/RecoverPass/RecoverPass";
 import { Registro } from "./components/pages/Registro/Registro";
 import { LayoutForms } from "./components/LayoutForms";
+import { Profile } from "./components/pages/Profile/Profile";
 
 export const App = () => {
   return (
@@ -19,6 +20,7 @@ export const App = () => {
             <Route path="/recuperar_contraseña" element={<RecoverPass />} />
             <Route path="/registro" element={<Registro />} />
           </Route>
+          <Route path="/perfil" element={<Profile />}/>
         </Routes>
       </UserContextProvider>
     </BrowserRouter>

@@ -25,6 +25,7 @@ export const login = async ({
       body: JSON.stringify({ email, password }),
     });
     const json = (await data.json()) as ServerResponse<Usuario>;
+    console.log(json)
     return json;
   } catch (error) {
     console.log(error);
