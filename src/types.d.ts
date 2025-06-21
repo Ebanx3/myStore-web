@@ -10,3 +10,13 @@ type Usuario = {
     email:string;
     id:string;
 }
+
+type Store = {
+  id: StoreId;
+  name: string;
+  ownerId: string;
+  createdAt: string;
+  statusActive: boolean;
+  maxProducts: number;
+  currentProducts: number;
+};
