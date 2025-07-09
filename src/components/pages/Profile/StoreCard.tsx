@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export const StoreCard = ({ store }: { store: Store }) => {
   const link = store.name.replaceAll(" ","_")
   return (
-    <Link to={`/${link}`} className="border border-sky-400 bg-gradient-to-t from-white to-sky-100 rounded-md p-4 flex flex-col justify-center gap-2 h-[300px]">
+    <article className="shadow-sm shadow-stone-400  rounded-md p-4 flex flex-col justify-center items-center gap-2 h-[300px] text-sky-950">
       <span className="text-xl font-bold uppercase">{store.name}</span>
       <span className="text-sm font-medium">
         Cantidad de productos:{" "}
@@ -16,10 +16,10 @@ export const StoreCard = ({ store }: { store: Store }) => {
         {store.statusActive ? (
           <span className="text-emerald-600 border rounded-md py-1 px-2">Activa</span>
         ) : (
-          <span className="text-red-600 border rounded-md ml-2 px-1">Desactiva</span>
+          <span className="text-red-600 border rounded-md ml-2 px-1 font-bold">Desactiva</span>
         )}
       </span>
-      
-    </Link>
+      <Link to={`/${link}`} className="bg-blue-600 text-white font-medium p-2 hover:bg-blue-500">Ver Tienda</Link> 
+    </article>
   );
 };

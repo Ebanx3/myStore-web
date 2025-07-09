@@ -24,7 +24,7 @@ export const StoresContainer = () => {
         <div className="flex justify-between items-center">
           <h2 className="text-2xl font-medium">Mis Tiendas</h2>
           <button
-            className="bg-blue-600 text-white py-2 px-4 font-medium hover:bg-blue-500 cursor-pointer"
+            className="border-2 border-blue-600 text-blue-600 py-2 px-4 font-medium hover:bg-blue-600 hover:text-white cursor-pointer"
             onClick={() => setShowNewStoreModal(true)}
           >
             Crear Tienda
@@ -35,7 +35,7 @@ export const StoresContainer = () => {
             Aún no tienes ninguna tienda.
           </span>
         )}
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,300px))] gap-8 mt-12">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,300px))] gap-8 mt-12 p-4" >
           {stores.map((store) => (
             <StoreCard store={store} key={store.id} />
           ))}

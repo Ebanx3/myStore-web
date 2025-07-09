@@ -4,7 +4,7 @@ export const getUserStores = async () => {
   try {
     const data = await fetch(`${endpoint}/byUser`, { credentials: "include" });
     const json = (await data.json()) as ServerResponse<Store[]>;
-    console.log(json)
+    console.log(json);
     return json;
   } catch (error) {
     console.log(error);
@@ -27,6 +27,20 @@ export const createStore = async ({
       credentials: "include",
     });
     const json = (await data.json()) as ServerResponse<string>;
+    return json;
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: "Error al conectar con el servidor" };
+  }
+};
+
+export const changeStoreStatus = async (storeName: string) => {
+  try {
+    const data = await fetch(`${endpoint}/changeStoreStatus/${storeName}`, {
+      method: "PATCH",
+      credentials: "include",
+    });
+    const json = (await data.json()) as ServerResponse<undefined>;
     return json;
   } catch (error) {
     console.log(error);

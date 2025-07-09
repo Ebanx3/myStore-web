@@ -76,3 +76,13 @@ export const recoverPass = async (email: string) => {
     };
   }
 };
+
+export const logout = async () => {
+  try{
+    await fetch(`${endpoint}/logout`,{credentials:'include'});
+  }
+  catch(error){
+    console.log(error);
+    return {success:false, message: "Error al intentar desloguear"};
+  }
+}
