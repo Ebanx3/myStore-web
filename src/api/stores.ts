@@ -47,3 +47,16 @@ export const changeStoreStatus = async (storeName: string) => {
     return { success: false, message: "Error al conectar con el servidor" };
   }
 };
+
+export const storeIsMine = async (storeName: string) => {
+  try {
+    const data = await fetch(`${endpoint}/storeIsMine/${storeName}`, {
+      credentials: "include",
+    });
+    const json = (await data.json()) as ServerResponse<undefined>;
+    return json;
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: "Error al conectar con el servidor" };
+  }
+};
