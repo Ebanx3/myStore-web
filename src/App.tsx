@@ -8,7 +8,8 @@ import { Registro } from "./components/pages/Registro/Registro";
 import { LayoutForms } from "./components/LayoutForms";
 import { Profile } from "./components/pages/Profile/Profile";
 import { StoreHomePage } from "./components/pages/Store/Home/StoreHomePage";
-import { AdminPanel } from "./components/pages/Store/AdminPanel";
+import { AdminPanel } from "./components/pages/Store/AdminPanel/AdminPanel";
+import { Menu } from "./components/pages/Store/AdminPanel/Menu";
 
 export const App = () => {
   return (
@@ -27,7 +28,9 @@ export const App = () => {
           <Route path="/perfil" element={<Profile />}/>
 
           <Route path="/:storeName" element={<StoreHomePage />}/>
-          <Route path="/:storeName/admin" element={<AdminPanel />}/>
+          <Route element={<AdminPanel />}>
+            <Route path="/:storeName/admin" element={<Menu />}/>
+          </Route>
         </Routes>
       </UserContextProvider>
     </BrowserRouter>
