@@ -53,7 +53,7 @@ export const storeIsMine = async (storeName: string) => {
     const data = await fetch(`${endpoint}/storeIsMine/${storeName}`, {
       credentials: "include",
     });
-    const json = (await data.json()) as ServerResponse<undefined>;
+    const json = (await data.json()) as ServerResponse<Store>;
     return json;
   } catch (error) {
     console.log(error);
