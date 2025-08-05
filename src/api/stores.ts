@@ -4,7 +4,6 @@ export const getUserStores = async () => {
   try {
     const data = await fetch(`${endpoint}/byUser`, { credentials: "include" });
     const json = (await data.json()) as ServerResponse<Store[]>;
-    console.log(json);
     return json;
   } catch (error) {
     console.log(error);

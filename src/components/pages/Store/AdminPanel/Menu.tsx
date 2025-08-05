@@ -1,32 +1,17 @@
-import { useEffect, useState } from "react";
-import { changeStoreStatus, storeIsMine } from "../../../../api/stores";
-import { AdminPanelButton } from "./AdminPanelButton";
-import { useNavigate, useParams } from "react-router-dom";
-import { LoaderSVG } from "../../../../assets/LoaderSVG";
+
+import { changeStoreStatus } from "../../../../api/stores";
+import { Link } from "react-router-dom";
+import { useStoreContext } from "../../../../hooks/useStoreContext";
+
 
 export const Menu = () => {
-  const [store, setStore] = useState<Store | null>(null);
-  const { storeName } = useParams();
-  const nav = useNavigate();
-
-  useEffect(() => {
-    if (storeName)
-      (async () => {
-        const res = await storeIsMine(storeName);
-        if (!res.success) nav(-1);
-        else setStore(res.data!);
-      })();
-  }, [nav, storeName]);
-
+  const { store, setStore} = useStoreContext();
   return (
     <>
-      {store === null ? (
-        <LoaderSVG />
-      ) : (
         <div className="grid grid-cols-[2fr_1fr] gap-4 items-end">
           <span className="w-[32ch]">
             Estado de tienda:{" "}
-            {store.statusActive ? (
+            {store!.statusActive ? (
               <span className="text-green-600 font-medium border px-1">
                 Activa
               </span>
@@ -36,23 +21,35 @@ export const Menu = () => {
               </span>
             )}
           </span>
-          <AdminPanelButton
-            label={store.statusActive ? "Desactivar" : "Activar"}
-            onClickMethod={() => {
-              changeStoreStatus(store.name!).then((res) => {
+
+          <button
+            className="border px-4 font-medium hover:bg-stone-900 hover:text-white cursor-pointer text-center"
+            onClick={() => {
+              changeStoreStatus(store!.name!.replaceAll(" ","_")).then((res) => {
                 if (res.success)
-                  setStore({ ...store, statusActive: !store.statusActive });
+                  setStore({ ...store!, statusActive: !store!.statusActive });
               });
             }}
-          />
+          >
+            {store!.statusActive ? "Desactivar" : "Activar"}
+          </button>
 
           <span>Productos</span>
-          <AdminPanelButton label="Gestionar" onClickMethod={() => {}} />
+          <Link
+            to={`productos`}
+            className="border px-4 font-medium hover:bg-stone-900 hover:text-white cursor-pointer text-center"
+          >
+            Gestionar
+          </Link>
 
           <span>Categorías</span>
-          <AdminPanelButton label="Gestionar" onClickMethod={() => {}} />
+          <Link
+            to={"categorias"}
+            className="border px-4 font-medium hover:bg-stone-900 hover:text-white cursor-pointer text-center"
+          >
+            Gestionar
+          </Link>
         </div>
-      )}
     </>
   );
 };

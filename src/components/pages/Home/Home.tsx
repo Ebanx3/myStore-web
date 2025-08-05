@@ -10,7 +10,7 @@ export const Home = () => {
       <Navbar />
       <Header />
       <Benefits />
-      <div className="h-72 "></div>
+      <div className="h-[50vh] "></div>
     </main>
     </>
 

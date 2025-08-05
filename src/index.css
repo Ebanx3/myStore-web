@@ -10,7 +10,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: oklch(54.6% 0.245 262.881);
+  background: oklch(68.74% 0.13188 264.34);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -20,4 +20,3 @@
 ::-webkit-scrollbar-track {
   opacity: 0;
 }
-

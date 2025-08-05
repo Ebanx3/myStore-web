@@ -10,6 +10,10 @@ import { Profile } from "./components/pages/Profile/Profile";
 import { StoreHomePage } from "./components/pages/Store/Home/StoreHomePage";
 import { AdminPanel } from "./components/pages/Store/AdminPanel/AdminPanel";
 import { Menu } from "./components/pages/Store/AdminPanel/Menu";
+import { AdminProducts } from "./components/pages/Store/AdminPanel/AdminProducts";
+import { StoreContextProvider } from "./contexts/StoreContextProvider";
+import { ProductPage } from "./components/pages/Store/Home/ProductPage";
+import { CartsContextProvider } from "./contexts/CartContextProvider";
 
 export const App = () => {
   return (
@@ -25,11 +29,35 @@ export const App = () => {
             <Route path="/registro" element={<Registro />} />
           </Route>
 
-          <Route path="/perfil" element={<Profile />}/>
+          <Route path="/perfil" element={<Profile />} />
 
-          <Route path="/:storeName" element={<StoreHomePage />}/>
-          <Route element={<AdminPanel />}>
-            <Route path="/:storeName/admin" element={<Menu />}/>
+          <Route
+            path="/:storeName"
+            element={
+              <StoreContextProvider>
+                <CartsContextProvider>
+                  <StoreHomePage />
+                </CartsContextProvider>
+              </StoreContextProvider>
+            }
+          />
+
+          <Route path="/:storeName/:productId" element={<ProductPage />} />
+
+          <Route
+            element={
+              <StoreContextProvider>
+                <CartsContextProvider>
+                  <AdminPanel />
+                </CartsContextProvider>
+              </StoreContextProvider>
+            }
+          >
+            <Route
+              path="/:storeName/admin/productos"
+              element={<AdminProducts />}
+            />
+            <Route path="/:storeName/admin" element={<Menu />} />
           </Route>
         </Routes>
       </UserContextProvider>

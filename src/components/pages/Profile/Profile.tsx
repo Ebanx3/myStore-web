@@ -10,7 +10,7 @@ export const Profile = () => {
   const nav = useNavigate();
 
   useEffect(() => {
-    if (user === null) nav("/");
+    if (user === null) nav("/ingresar");
   });
 
   if (user === null) {

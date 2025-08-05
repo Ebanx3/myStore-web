@@ -1,16 +1,49 @@
 import { useParams } from "react-router-dom";
 import { NavBar } from "../NavBar";
 import { ProductsContainer } from "./ProductsContainer";
+import { useEffect, useState } from "react";
+import { getProductsByStoreName } from "../../../../api/products";
+import { StoreInactive } from "./StoreInactive";
+import { StoreDontExists } from "./StoreDontExists";
 
 export const StoreHomePage = () => {
   const { storeName } = useParams();
   const storeNameWithSpaces = storeName?.replaceAll("_", " ") || "";
 
-  return (
-    <>
-      <title>{storeNameWithSpaces}</title>
-      <NavBar storeName={storeNameWithSpaces} />
-      <ProductsContainer storeName={storeNameWithSpaces}/>
-    </>
-  );
+  const [products, setProducts] = useState<Product[]>([]);
+  const [error, setError] = useState("");
+
+  const fetchProducts = async () => {
+    const res = await getProductsByStoreName(storeName!);
+    console.log(res)
+    if (res.success && res.data) {
+      setProducts(res.data);
+    }
+    if (!res.success) {
+      setError(res.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  if (error === "Store is not active") {
+    return <StoreInactive storeName={storeNameWithSpaces}/>;
+  }
+  if (error === "Does not exists a store with that name") {
+    return <StoreDontExists />;
+  }
+
+  // if (products.length === 0){
+
+  // }
+
+    return (
+      <>
+        <title>{storeNameWithSpaces}</title>
+        <NavBar storeName={storeNameWithSpaces} />
+        <ProductsContainer products={products} />
+      </>
+    );
 };

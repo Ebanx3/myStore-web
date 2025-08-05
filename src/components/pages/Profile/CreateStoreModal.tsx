@@ -76,7 +76,7 @@ export const CreateStoreModal = ({ closeModal, onCreated }: Props) => {
             ) : (
               <>
                 <button
-                  className="bg-orange-700 text-white p-2 font-medium text-sm hover:bg-orange-500 cursor-pointer"
+                  className="bg-stone-700 text-white p-2 font-medium text-sm hover:bg-stone-500 cursor-pointer"
                   onClick={closeModal}
                 >
                   Cancelar

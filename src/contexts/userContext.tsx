@@ -1,8 +1,8 @@
 import {createContext} from "react";
 
 interface UserContext {
-  user: Usuario | null;
-  setUser: React.Dispatch<React.SetStateAction<Usuario | null>>;
+  user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
 }
 
 export const userContext = createContext<UserContext>({

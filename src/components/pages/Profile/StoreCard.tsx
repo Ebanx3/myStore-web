@@ -15,12 +15,12 @@ export const StoreCard = ({ store }: { store: Store }) => {
       <span className="text-sm font-medium h-8 flex items-center">
         Estado:{" "}
         {store.statusActive ? (
-          <span className="text-emerald-600 border rounded-md py-1 px-2">
+          <span className="text-emerald-600 py-1 px-2 font-bold">
             Activa
           </span>
         ) : (
-          <span className="text-red-600 border rounded-md ml-2 px-1 font-bold">
-            Desactiva
+          <span className="text-red-600 ml-2 px-1 font-bold">
+            Inactiva
           </span>
         )}
       </span>
