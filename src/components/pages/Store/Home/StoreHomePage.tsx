@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import { NavBar } from "../NavBar";
 import { ProductsContainer } from "./ProductsContainer";
 import { useEffect, useState } from "react";
 import { getProductsByStoreName } from "../../../../api/products";
@@ -15,7 +14,6 @@ export const StoreHomePage = () => {
 
   const fetchProducts = async () => {
     const res = await getProductsByStoreName(storeName!);
-    console.log(res)
     if (res.success && res.data) {
       setProducts(res.data);
     }
@@ -29,21 +27,15 @@ export const StoreHomePage = () => {
   }, []);
 
   if (error === "Store is not active") {
-    return <StoreInactive storeName={storeNameWithSpaces}/>;
+    return <StoreInactive storeName={storeNameWithSpaces} />;
   }
   if (error === "Does not exists a store with that name") {
     return <StoreDontExists />;
   }
 
-  // if (products.length === 0){
-
-  // }
-
-    return (
-      <>
-        <title>{storeNameWithSpaces}</title>
-        <NavBar storeName={storeNameWithSpaces} />
-        <ProductsContainer products={products} />
-      </>
-    );
+  return (
+    <>
+      <ProductsContainer products={products} />
+    </>
+  );
 };

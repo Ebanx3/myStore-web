@@ -1,20 +1,20 @@
 import { createContext } from "react";
 
 interface CartsContext {
-  getCart: (storeId: string) => Cart | null;
+  getCart: (storeName: string) => Cart | null;
   addItem: ({
     product,
-    storeId,
+    storeName,
     count,
   }: {
     product: Product;
-    storeId: string;
+    storeName: string;
     count: number;
   }) => void;
-  removeItem: ({storeId, productId}:{storeId:string, productId: string}) => void;
-  clear: (storeId: string) => void;
-  totalPrice: (storeId: string) => number;
-  countProducts: (storeId: string) => number;
+  removeItem: ({storeName, productId}:{storeName:string, productId: string}) => void;
+  clear: (storeName: string) => void;
+  totalPrice: (storeName: string) => number;
+  countProducts: (storeName: string) => number;
 }
 
 export const cartsContext = createContext<CartsContext>({} as CartsContext);

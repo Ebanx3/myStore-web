@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import { NavBar } from "../NavBar";
 import { useEffect, useState } from "react";
 import { getProduct } from "../../../../api/products";
 import { AddToCartController } from "./AddToCartController";
@@ -22,7 +21,6 @@ export const ProductPage = () => {
   return (
     <>
       <title>{product?.name}</title>
-      <NavBar storeName={storeName!.replaceAll("_", " ")} />
       {product && (
         <article className="flex max-w-[1024px] m-auto p-4">
           <img
@@ -37,10 +35,19 @@ export const ProductPage = () => {
               <p className=" whitespace-pre-line mt-4">{product.details}</p>
             </div>
             <div className="flex justify-between items-end">
-              <span className="text-3xl font-bold">
-                ${product.price}
-              </span>
-              <AddToCartController product={product} />
+              <div className="flex flex-col">
+                {product.stock > 0 ? (
+                  <span className="text-sm text-green-600 font-bold">
+                    Stock disponible: {product.stock}
+                  </span>
+                ) : (
+                  <span className="text-sm text-red-600 font-bold">
+                    No disponible en stock
+                  </span>
+                )}
+                <span className="text-3xl font-bold">${product.price}</span>
+              </div>
+              {product.stock > 0 && <AddToCartController storeName={storeName!.replaceAll("_"," ")} product={product} />}
             </div>
           </div>
         </article>

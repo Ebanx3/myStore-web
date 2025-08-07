@@ -14,52 +14,48 @@ import { AdminProducts } from "./components/pages/Store/AdminPanel/AdminProducts
 import { StoreContextProvider } from "./contexts/StoreContextProvider";
 import { ProductPage } from "./components/pages/Store/Home/ProductPage";
 import { CartsContextProvider } from "./contexts/CartContextProvider";
+import { StoreLayout } from "./components/pages/Store/Home/StoreLayout";
 
 export const App = () => {
   return (
     <BrowserRouter>
       <UserContextProvider>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/verificar/:verificationCode" element={<VerifyUser />} />
-
-          <Route element={<LayoutForms />}>
-            <Route path="/ingresar" element={<Ingresar />} />
-            <Route path="/recuperar_contraseña" element={<RecoverPass />} />
-            <Route path="/registro" element={<Registro />} />
-          </Route>
-
-          <Route path="/perfil" element={<Profile />} />
-
-          <Route
-            path="/:storeName"
-            element={
-              <StoreContextProvider>
-                <CartsContextProvider>
-                  <StoreHomePage />
-                </CartsContextProvider>
-              </StoreContextProvider>
-            }
-          />
-
-          <Route path="/:storeName/:productId" element={<ProductPage />} />
-
-          <Route
-            element={
-              <StoreContextProvider>
-                <CartsContextProvider>
-                  <AdminPanel />
-                </CartsContextProvider>
-              </StoreContextProvider>
-            }
-          >
+        <CartsContextProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
             <Route
-              path="/:storeName/admin/productos"
-              element={<AdminProducts />}
+              path="/verificar/:verificationCode"
+              element={<VerifyUser />}
             />
-            <Route path="/:storeName/admin" element={<Menu />} />
-          </Route>
-        </Routes>
+
+            <Route element={<LayoutForms />}>
+              <Route path="/ingresar" element={<Ingresar />} />
+              <Route path="/recuperar_contraseña" element={<RecoverPass />} />
+              <Route path="/registro" element={<Registro />} />
+            </Route>
+
+            <Route path="/perfil" element={<Profile />} />
+
+            <Route element={<StoreLayout />}>
+              <Route path="/:storeName" element={<StoreHomePage />} />
+              <Route path="/:storeName/:productId" element={<ProductPage />} />
+            </Route>
+
+            <Route
+              element={
+                <StoreContextProvider>
+                  <AdminPanel />
+                </StoreContextProvider>
+              }
+            >
+              <Route
+                path="/:storeName/admin/productos"
+                element={<AdminProducts />}
+              />
+              <Route path="/:storeName/admin" element={<Menu />} />
+            </Route>
+          </Routes>
+        </CartsContextProvider>
       </UserContextProvider>
     </BrowserRouter>
   );

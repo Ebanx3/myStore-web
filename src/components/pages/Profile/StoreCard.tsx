@@ -1,11 +1,35 @@
 import { Link } from "react-router-dom";
 import { GearSVG } from "../../../assets/GearSVG";
+import { ClipboardSVG } from "../../../assets/ClipboardSVG";
+import { useState } from "react";
 
 export const StoreCard = ({ store }: { store: Store }) => {
+  const [wasCopied, setWasCopied] = useState(false);
   const link = store.name.replaceAll(" ", "_");
+
+  const handleCopyLink = async () => {
+    await navigator.clipboard.writeText(
+      `${window.location.protocol}//${window.location.host}/${link}`
+    );
+    setWasCopied(true);
+    setTimeout(() => {
+      setWasCopied(false);
+    }, 3000);
+  };
+
   return (
     <article className="shadow-sm shadow-stone-400  rounded-md p-4 flex flex-col justify-center items-center gap-2 h-[300px] text-sky-950">
       <span className="text-xl font-bold uppercase">{store.name}</span>
+      {wasCopied ? (
+        <span className="text-sm font-medium text-blue-600 ">Copiado!</span>
+      ) : (
+        <button
+          className="text-sm font-medium text-blue-600 flex gap-2 cursor-pointer hover:text-blue-400"
+          onClick={handleCopyLink}
+        >
+          Copiar enlace <ClipboardSVG />
+        </button>
+      )}
       <span className="text-sm font-medium">
         Cantidad de productos:{" "}
         <span className="text-md font-bold">
@@ -15,13 +39,9 @@ export const StoreCard = ({ store }: { store: Store }) => {
       <span className="text-sm font-medium h-8 flex items-center">
         Estado:{" "}
         {store.statusActive ? (
-          <span className="text-emerald-600 py-1 px-2 font-bold">
-            Activa
-          </span>
+          <span className="text-emerald-600 py-1 px-2 font-bold">Activa</span>
         ) : (
-          <span className="text-red-600 ml-2 px-1 font-bold">
-            Inactiva
-          </span>
+          <span className="text-red-600 ml-2 px-1 font-bold">Inactiva</span>
         )}
       </span>
       <Link

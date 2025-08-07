@@ -40,6 +40,6 @@ type ProductAtCart = {
 };
 
 type Cart = {
-  storeId: string;
+  storeName: string;
   products: ProductAtCart[];
 };
