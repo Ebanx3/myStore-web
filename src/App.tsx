@@ -15,6 +15,7 @@ import { StoreContextProvider } from "./contexts/StoreContextProvider";
 import { ProductPage } from "./components/pages/Store/Home/ProductPage";
 import { CartsContextProvider } from "./contexts/CartContextProvider";
 import { StoreLayout } from "./components/pages/Store/Home/StoreLayout";
+import { Carrito } from "./components/pages/Store/Carrito/Carrito";
 
 export const App = () => {
   return (
@@ -38,7 +39,8 @@ export const App = () => {
 
             <Route element={<StoreLayout />}>
               <Route path="/:storeName" element={<StoreHomePage />} />
-              <Route path="/:storeName/:productId" element={<ProductPage />} />
+              <Route path="/:storeName/carrito" element={<Carrito />} />
+              <Route path="/:storeName/producto/:productId" element={<ProductPage />} />
             </Route>
 
             <Route

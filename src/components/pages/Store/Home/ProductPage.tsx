@@ -22,7 +22,7 @@ export const ProductPage = () => {
     <>
       <title>{product?.name}</title>
       {product && (
-        <article className="flex max-w-[1024px] m-auto p-4">
+        <article className="flex max-w-[1024px] m-auto p-4 mt-4">
           <img
             src={product.picturesUrl[0] ?? ""}
             alt={product.name}

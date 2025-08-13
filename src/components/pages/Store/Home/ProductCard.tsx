@@ -9,7 +9,7 @@ export const ProductCard = ({ product }: Props) => {
 
   return (
     <Link
-      to={`/${storeName}/${product.id}`}
+      to={`/${storeName}/producto/${product.id}`}
       className="border shadow-md shadow-stone-400 p-4 flex flex-col hover:scale-105 transition-all duration-150 ease-in-out"
     >
       <img
@@ -19,7 +19,7 @@ export const ProductCard = ({ product }: Props) => {
         style={{ viewTransitionName: `img-${product.id}` }}
       />
       <h2 className="font-medium my-2">{product.name}</h2>
-      <span className="font-bold self-end text-xl">$ {product.price}</span>
+      <span className="font-bold self-end text-xl mt-auto">$ {product.price}</span>
     </Link>
   );
 };
